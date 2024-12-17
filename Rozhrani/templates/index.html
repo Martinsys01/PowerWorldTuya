@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vizualizace {{ device_name }}</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000; /* Nastavení černého pozadí */
+            color: #fff; /* Nastavení bílého textu pro lepší čitelnost */
+        }
+
+        #background {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: url('/static/images/heat_pump.png') no-repeat center center;
+            background-size: contain;
+        }
+
+        .button-container {
+            position: absolute;
+            top: 10%; /* Umístění 10 % od horního okraje */
+            left: 10%; /* Umístění 10 % od levého okraje */
+            display: flex;
+            flex-direction: column; /* Tlačítka pod sebou */
+            gap: 10px; /* Mezera mezi tlačítky */
+        }
+
+        .button-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            color: white;
+            background-color: #333;
+            border: 1px solid white;
+            border-radius: 5px;
+        }
+
+        .data-box {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #ccc;  /* Rámeček */
+            border-radius: 5px;  /* Zaoblení rámečku */
+            padding: 10px;
+            text-align: center;
+            width: 100px;
+            font-size: 12px;
+        }
+
+        #timestamp {
+            position: absolute;
+            top: 2%;
+            right: 10%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            text-align: center;
+            font-size: 12px;
+            color: #333;
+        }
+
+        .data-title {
+            font-size: 10px; /* Text pro popis */
+            color: #555; /* Jemnější barva textu */
+            margin: 0;
+            text-align: center;
+        }
+
+        .data-value {
+            font-size: 14px; /* Text pro hodnotu */
+            font-weight: bold;
+            color: #333;
+            margin: 5px 0 0;
+            text-align: center;
+        }
+
+        /* Mediální dotazy pro mobilní zařízení */
+        @media (max-width: 768px) {
+            .button-container {
+                top: 5%; /* Přizpůsobení pozice */
+                left: 5%;
+                gap: 5px;
+            }
+
+            .button-container button {
+                width: 90%; /* Širší tlačítka na mobilu */
+                font-size: 14px; /* Menší text na tlačítkách */
+            }
+
+            .data-box {
+                width: 70px; /* Zmenšené boxy */
+                padding: 5px;
+                font-size: 10px; /* Menší text */
+            }
+
+            .data-title {
+                font-size: 8px;
+            }
+
+            .data-value {
+                font-size: 12px;
+            }
+
+            #background {
+                background-size: cover; /* Lepší pokrytí na malých obrazovkách */
+            }
+        }
+
+        /* Mediální dotazy pro velmi malé obrazovky (např. 480px) */
+        @media (max-width: 480px) {
+            .button-container {
+                top: 2%; /* Ještě menší pozice */
+                left: 2%;
+            }
+
+            .button-container button {
+                font-size: 12px;
+            }
+
+            .data-box {
+                width: 50px; /* Velmi malé boxy */
+                font-size: 8px;
+            }
+
+            .data-title {
+                font-size: 6px;
+            }
+
+            .data-value {
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="background">
+        <!-- Tlačítka -->
+        <div class="button-container"></div>
+            <!-- Tlačítka se generují dynamicky -->
+        
+
+        <!-- Časová značka -->
+        <div id="timestamp">Poslední aktualizace: Načítání...</div>
+    </div>
+
+        <!-- Dynamicky generované boxy -->
+        <script>
+            
+            // Endpoint pro data (předaný serverem)
+            const endpoint = "{{ endpoint }}";
+            // Zajištění zobrazení chyby, pokud není endpoint nastaven
+            if (!endpoint) {
+                alert("Žádné aktivní čerpadlo. Zkontrolujte konfiguraci.");
+            }
+
+            // Environmentální proměnné (získané serverem)
+
+                       
+            const pump1Active = "{{ 'true' if pump1_active else 'false' }}";
+            const pump2Active = "{{ 'true' if pump2_active else 'false' }}";
+            
+        
+            // Tlačítka
+            const buttonContainer = document.querySelector('.button-container');
+
+            if (pump1Active === 'true') {
+                const button1 = document.createElement('button');
+                button1.innerText = "Tepelko 1";
+                button1.onclick = () => window.location.href = '/';
+                buttonContainer.appendChild(button1);
+            }
+
+            if (pump2Active === 'true') {
+                const button2 = document.createElement('button');
+                button2.innerText = "Tepelko 2";
+                button2.onclick = () => window.location.href = '/tepelko2';
+                buttonContainer.appendChild(button2);
+            }
+
+        
+        
+
+    
+        // Konfigurační seznam hodnot a jejich pozic
+            const valueConfig = [
+            { id: 'compressor-temp', name: 'Teplota chladiva před kompresorem', key: 'Teplota chladiva před kompresorem', top: '20%', left: '34%' },
+            { id: 'evaporator-temp', name: 'Teplota výparníku', key: 'Teplota výparníku', top: '90%', left: '10%' },
+            { id: 'Outside-temp', name: 'Venkovní teplota', key: 'Teplota venkovní', top: '2%', left: '11%' },
+            { id: 'fan1-speed', name: 'Otáčky ventilátoru 1', key: 'Otáčky ventilátoru 1', top: '60%', left: '25%' },
+            { id: 'fan2-speed', name: 'Otáčky ventilátoru 2', key: 'Otáčky ventilátoru 2', top: '78%', left: '25%' },
+            { id: 'compressor-freq', name: 'Frekvence kompresoru', key: 'Frekvence kompresoru', top: '2%', left: '40%' },
+            { id: 'main-exp-valve', name: 'Otevření hlavního exp. ventilu', key: 'Otevření hlavního exp. ventilu', top: '80%', left: '50%' },
+            { id: 'inlet-temp', name: 'Teplota přívodu', key: 'Teplota přívodu', top: '50%', left: '70%' },
+            { id: 'return-temp', name: 'Teplota zpátečky', key: 'Teplota zpátečky', top: '90%', left: '70%' },
+            { id: 'tank-temp', name: 'Teplota zásobníku TUV', key: 'Teplota zásobníku TUV', top: '16%', left: '81%' },
+            { id: 'coil-temp', name: 'Teplota chladící cívky', key: 'Teplota chladící cívky', top: '80%', left: '10%' },
+            { id: 'condenser-temp', name: 'Teplota chladiče', key: 'Teplota chladiče', top: '40%', left: '10%' },
+            { id: 'post-compressor-temp', name: 'Teplota chladiva za kompresorem', key: 'Teplota chladiva za kompresorem', top: '20%', left: '55%' },
+            { id: 'power', name: 'Stav', key: 'power', top: '2%', left: '20%' },
+            { id: 'compressor-current', name: 'Proud kompresoru', key: 'Proud kompresoru', top: '2%', left: '50%' },
+            { id: 'device-current', name: 'Proud celého zařízení', key: 'Proud celého zařízení', top: '2%', left: '60%' },
+            { id: 'Heat-Ppower', name: 'Topný výkon', key: 'Výkon vytápění/chlazení', top: '2%', left: '70%' },
+            { id: 'COP-Performance', name: 'COP', key: 'COP', top: '2%', left: '30%' },
+            { id: 'Pump-speed', name: 'Otáčky čerpadla', key: 'Aktuální rychlost čerpadla', top: '70%', left: '70%' }
+        ];
+
+        const background = document.getElementById('background');
+            valueConfig.forEach(config => {
+                const box = document.createElement('div');
+                box.className = 'data-box';
+                box.style.top = config.top;
+                box.style.left = config.left;
+                box.id = config.id;
+
+                box.innerHTML = `
+                    <p class="data-title">${config.name}</p>
+                    <p class="data-value" id="${config.id}-value">Načítání...</p>
+                `;
+                background.appendChild(box);
+            });
+
+        
+
+        // Funkce pro načtení a aktualizaci dat a časové značky
+        async function fetchData() {
+            try {
+                const response = await fetch(endpoint); // Použití dynamického endpointu
+                const data = await response.json();
+
+                // Aktualizace hodnot na stránce
+                valueConfig.forEach(config => {
+                    const valueElement = document.getElementById(`${config.id}-value`);
+                    if (data[config.key] !== undefined) {
+                        valueElement.innerText = data[config.key]; // Aktualizace hodnoty
+                    } else {
+                        valueElement.innerText = 'N/A';  // Pokud není dostupná
+                    }
+                });
+
+                // Aktualizace časové značky
+                const timestampElement = document.getElementById('timestamp');
+                if (data.timestamp) {
+                    const formattedTime = new Date(data.timestamp).toLocaleString();
+                    timestampElement.innerText = `Poslední aktualizace: ${formattedTime}`;
+                } else {
+                    timestampElement.innerText = 'Poslední aktualizace: N/A';
+                }
+            } catch (error) {
+                console.error('Chyba při načítání dat:', error);
+            }
+        }
+
+        // Pravidelné načítání dat každých 5 sekund
+        setInterval(fetchData, 5000);
+        fetchData();
+
+        </script>
+    </div>
+</body>
+</html>
