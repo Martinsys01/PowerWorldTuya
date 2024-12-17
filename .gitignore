@@ -5,12 +5,19 @@ venv/
 Log/
 
 # Konfigurace a citlivé údaje
-config/tuya_config.json
-config/influxdb_config.py
+
 
 # Pycache
 __pycache__/
 
 # OS specifické soubory
-*.DS_Store
+
 Thumbs.db
+
+*.pyc
+*.pyo
+*.pyd
+.env
+venv/
+.vscode/
+.DS_Store
