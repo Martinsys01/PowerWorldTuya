@@ -83,7 +83,7 @@ Před instalací se ujistěte, že máte nainstalováno:
 
 2. **Přesun do složky projektu**:
    - **Windows (PowerShell)**:
-     ```powershell
+     ```bash
      cd C:\Tepelka\PowerWorldTuya\ 
      ```
    - **Linux (Terminál)**:
@@ -101,7 +101,7 @@ Doporučujeme používat virtuální prostředí pro správu závislostí.
  python - vrátí se jeho verze  a příkazem  pip  ověříme správnou instalaci balíčků
    - **Windows**:powershell** C:\Tepelka\PowerWorldTuya\ 
 
-```
+```bash
      python -m venv venv
 ```
 	
@@ -114,23 +114,23 @@ Doporučujeme používat virtuální prostředí pro správu závislostí.
 2. **Aktivace virtuálního prostředí**:
    - **Windows**:powershell**
    
-```
+```bash
      .\venv\Scripts\Activate
 ```
-**(.venv)(PS C:\Tepelka\PowerWorldTuya>)**
+	**(venv)(PS C:\Tepelka\PowerWorldTuya>)**
 	 
-	 **Pokud se vypíše chybová hláška**
-	 **.\venv\Scripts\Activate : File C:\Tepelka\PowerWorldTuya\venv\Scripts\Activate.ps1 
+	Pokud se vypíše chybová hláška
+	 ".\venv\Scripts\Activate : File C:\Tepelka\PowerWorldTuya\venv\Scripts\Activate.ps1"
 	 **cannot be loaded because running scripts is disabled on this system. **
 	 
 		Zavřete okno powershell  spussťte ho znovu s právy administrátora  
 		( Start /Powershell - pravé tlačítko myši  - spustit jako Administrator
 		Změňte politiku     příkazem 
 		
-``` 
+```bash 
 Set-ExecutionPolicy RemoteSigned
-	
 	```
+
 Potvrďte bezpečnostní dotaz  odpovědí **Yes   [Y] **
 		
 Znovu spusťte
@@ -139,8 +139,12 @@ Znovu spusťte
 .\venv\Scripts\Activate
 ```
 Teď by mělo  prostředí být aktivováno a před PS  by se mělo zobrazit venv  
-**(venv) PS C:\Tepelko\PowerWorldTuay**
+	
 		
+	**Windows**
+	```bash
+	(venv) PS C:\Tepelko\PowerWorldTuay
+	```
      
    - **Linux**:
      ```bash
