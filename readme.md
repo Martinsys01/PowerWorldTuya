@@ -78,7 +78,7 @@ Před instalací se ujistěte, že máte nainstalováno:
 ### **1. Stažení projektu**
 
 1. **Stažení zdrojového kódu**:
-   - Klonujte nebo stažněte projekt z [GitHub repozitáře](https://github.com/Martinsys01/PowerWorldTuya).
+   - Klonujte nebo stáhněte projekt z [GitHub repozitáře](https://github.com/Martinsys01/PowerWorldTuya).
    - Rozbalte soubory do cílové složky, např. `C:\Tepelka\`.
 
 2. **Přesun do složky projektu**:
@@ -88,7 +88,7 @@ Před instalací se ujistěte, že máte nainstalováno:
      ```
    - **Linux (Terminál)**:
      ```bash
-     cd /path/to/Tepelka/PowerWorld
+     cd /path/to/Tepelka/PowerWorldTuya
      ```
 
 ---
@@ -100,21 +100,26 @@ Doporučujeme používat virtuální prostředí pro správu závislostí.
 1. **Vytvoření virtuálního prostředí**:  Nejprve ověřte zda Pyhon je správně  nainstalován. Napište v PowerShellu 
  python - vrátí se jeho verze  a příkazem  pip  ověříme správnou instalaci balíčků
    - **Windows**:
-     ```powershell¨  (PS C:\Tepelka\PowerWorldTuya>)
-	 
+**powershell**  
+c
+
+```
      python -m venv venv
-	 
-     ```
+	```
+	
+     
    - **Linux**:
      ```bash
      python3 -m venv venv
      ```
 
-2. **Aktivace prostředí**:
+2. **Aktivace virtuálního prostředí**:
    - **Windows**:
-     ```powershell
+     **powershell**
+	 ```
      .\venv\Scripts\Activate				
 	 ```
+	 **(.venv)(PS C:\Tepelka\PowerWorldTuya>)**
 	 
 	 **Pokud se vypíše chybová hláška**
 	 **.\venv\Scripts\Activate : File C:\Tepelka\PowerWorldTuya\venv\Scripts\Activate.ps1 
@@ -123,16 +128,20 @@ Doporučujeme používat virtuální prostředí pro správu závislostí.
 		Zavřete okno powershell  spussťte ho znovu s právy administrátora  
 		( Start /Powershell - pravé tlačítko myši  - spustit jako Administrator
 		Změňte politiku     příkazem 
-	``` Set-ExecutionPolicy RemoteSigned
-	
-	```
-		Potvrďte bezpečnostní dotaz  odpovědí **Yes   [Y] **
 		
-		Znovu spusťte
-	```	.\venv\Scripts\Activate
+``` 
+Set-ExecutionPolicy RemoteSigned
 	
 	```
-		Teď by mělo  prostředí být aktivováno a před PS  by se mělo zobrazit venv   (venv) PS C:\Tepelko\PowerWorldTuay
+Potvrďte bezpečnostní dotaz  odpovědí **Yes   [Y] **
+		
+Znovu spusťte
+
+```	
+.\venv\Scripts\Activate
+```
+Teď by mělo  prostředí být aktivováno a před PS  by se mělo zobrazit venv  
+**(venv) PS C:\Tepelko\PowerWorldTuay**
 		
      
    - **Linux**:
@@ -236,15 +245,15 @@ pip install -r requirements.txt
 
 ---
 
-## **Vizualizace**
+		**Vizualizace**
 
-Webové rozhraní zobrazuje aktuální měřená data z InfluxDB:
+  **Webové rozhraní zobrazuje aktuální měřená data z InfluxDB:**
 - **Tlačítka Tepelko 1 a Tepelko 2**: Přepínání mezi vizualizacemi pro jednotlivá čerpadla (aktivní dle `.env`).
 - **Dynamická data**: Aktualizace hodnot každých 5 sekund.
 - **Časová značka**: Zobrazuje čas posledního vzorku načteného z InfluxDB.
 - **Responsivní design**: Optimalizace pro zobrazení na mobilních zařízeních.
 
-##**Vytvoření služby na win serveru**
+	**Vytvoření služby na win serveru**
 
 	**Pokud budme chtít  oba scripty aby běželi jako služba na serveru po startu ve  we win a nemuseli jsme je spouštět ručne:**
 		
