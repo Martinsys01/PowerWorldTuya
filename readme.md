@@ -349,15 +349,20 @@ Spusťte službu:
 
     Ověřte, že služby běží správně:
 
-```sc query TepelkaMain
 ```
-```sc query TepelkaApp
+sc query TepelkaMain
+```
+
+
+```
+sc query TepelkaApp
 ```
 
 Pro ukončení služeb použijte:
 ```
 nssm stop TepelkaMain
 ```
+
 ```
 nssm stop TepelkaApp
 ```
