@@ -97,7 +97,8 @@ Před instalací se ujistěte, že máte nainstalováno:
 
 Doporučujeme používat virtuální prostředí pro správu závislostí.
 
-1. **Vytvoření virtuálního prostředí**:  Nejprve ověřte zda Pyhon je správně  nainstalován. Napište v PowerShellu  python - vrátí se jeho verze  a příkazem  pip  ověříme správnou instalaci balíčků
+1. **Vytvoření virtuálního prostředí**:  Nejprve ověřte zda Pyhon je správně  nainstalován. Napište v PowerShellu 
+ python - vrátí se jeho verze  a příkazem  pip  ověříme správnou instalaci balíčků
    - **Windows**:
      ```powershell¨  (PS C:\Tepelka\PowerWorldTuya>)
 	 
@@ -112,37 +113,52 @@ Doporučujeme používat virtuální prostředí pro správu závislostí.
 2. **Aktivace prostředí**:
    - **Windows**:
      ```powershell
-     .\venv\Scripts\Activate				pokud se vypíše chybová hláška .\venv\Scripts\Activate : File C:\Tepelka\PowerWorldTuya\venv\Scripts\Activate.ps1 cannot be loaded because running scr
-ipts is disabled on this system.  
-		Zavřete okno powershell  spussťte ho znovu s právy administrátora  ( Start /Powershell - pravé tlačítko myši  - spustit jako Administrator
-		Změňte politiku     příkazem  `` Set-ExecutionPolicy RemoteSigned
-		Potvrďte bezpečnostní dotaz  odpovědá Yes   [Y] 
+     .\venv\Scripts\Activate				
+	 ```
+	 
+	 **Pokud se vypíše chybová hláška**
+	 **.\venv\Scripts\Activate : File C:\Tepelka\PowerWorldTuya\venv\Scripts\Activate.ps1 
+	 **cannot be loaded because running scripts is disabled on this system. **
+	 
+		Zavřete okno powershell  spussťte ho znovu s právy administrátora  
+		( Start /Powershell - pravé tlačítko myši  - spustit jako Administrator
+		Změňte politiku     příkazem 
+	``` Set-ExecutionPolicy RemoteSigned
+	
+	```
+		Potvrďte bezpečnostní dotaz  odpovědí **Yes   [Y] **
 		
-		Znovu spusťte   .\venv\Scripts\Activate
+		Znovu spusťte
+	```	.\venv\Scripts\Activate
+	
+	```
 		Teď by mělo  prostředí být aktivováno a před PS  by se mělo zobrazit venv   (venv) PS C:\Tepelko\PowerWorldTuay
 		
-     ```
+     
    - **Linux**:
      ```bash
      source venv/bin/activate
      ```
 
- ```
+
 
 ---
 
 ### **3. Instalace závislostí**
 
-Nainstalujte požadované balíčky pomocí souboru `requirements.txt`  stáhnou se všechny balíčka a závislosti, instalace chvylku potrvá tak vyčkejte dokonce:
+**Nainstalujte požadované balíčky pomocí souboru `requirements.txt`  stáhnou se všechny balíčka a závislosti, instalace chvilku potrvá tak vyčkejte dokonce:**
+		Vždy musíte být  v  adresáři v aktivním projektu  zde   (venv).  PS C:\Tepelka\PowerWorld\>
 
 ```bash
 pip install -r requirements.txt
+
 ```
 
 ---
 
-### **4. Konfigurace projektu** vetšina konfigurace bude vytvořena v proměném prostředí v souboru .env
-	vvzorový soubor /config/env.template   otevřte v editoru  změnťe  za vaše hodnoty a soubor uložte pod názvem  .env   ( bez jakékoliv přípony)
+### **4. Konfigurace projektu** vetšina konfigurace bude vytvořena v proměném prostředí v souboru .env**
+	vvzorový soubor /config/env.template   otevřte v editoru  změnťe  za vaše hodnoty.
+	Soubor uložte pod názvem ** .env   ( bez jakékoliv přípony) do kořenu složky PS C:\Tepelka\PowerWorld\**
 	
 
 1. **.env soubor**:
@@ -175,6 +191,8 @@ pip install -r requirements.txt
    PUMP2_ACTIVE=true
    ```
 
+3. ** Uložení .env
+	Ulužte soubor do kořenu projektu  C:\Tepelka\PowerWorld\  pod názvem .env
 ---
 
 ### **5. Spuštění projektu**
@@ -184,18 +202,30 @@ pip install -r requirements.txt
      ```bash
      python main.py
      ```
-	Pokud jste vytvořili správně  soubor .env  a je psrávně umístěn v kořenu  /PowerWorld/.env   projektu  mělo by vše běžet
+	Pokud jste vytvořili správně  soubor *.env  a je srávně umístěn v kořenu  /PowerWorld/.env   projektu  mělo by vše běžet
 		Při vypnutém debugu budete vidět zápis dat dle id čerpadla
 		
 		
 2. **Spuštění webového rozhraní**:  Pusťte nový terminál (Powershell)
-		 změna adresáře na adresář projektu  Cd C:\Tepelka\PowerWorldTuya\
-		 Aktivace prostředí   .\venv\Scripts\Activate
-   - Přesuňte se do složky `Rozhrani`:
-     ```bash
+		 změna adresáře na adresář projektu
+
+	```cd C:\Tepelka\PowerWorldTuya\
+	
+	```
+	
+	**	 Aktivace prostředí   **
+	
+	```
+	.\venv\Scripts\Activate
+	
+	```
+	
+   -*Přesuňte se v projektu do složky `Rozhrani`:**
+     
+	 ```bash
      cd Rozhrani
      ```
-   - Spusťte Flask aplikaci:
+   - *Spusťte Flask aplikaci:
      ```bash
      python app.py
      ```
@@ -214,41 +244,46 @@ Webové rozhraní zobrazuje aktuální měřená data z InfluxDB:
 - **Časová značka**: Zobrazuje čas posledního vzorku načteného z InfluxDB.
 - **Responsivní design**: Optimalizace pro zobrazení na mobilních zařízeních.
 
-##**Vytvoření služby na win sercveru**
+##**Vytvoření služby na win serveru**
 
-Pokud budme chtít  oba scripty aby běželi jako služba na serveru po startu ve  we win a nemuseli jsme je spouštět ručne:
+	**Pokud budme chtít  oba scripty aby běželi jako služba na serveru po startu ve  we win a nemuseli jsme je spouštět ručne:**
 		
-		Postup pro vytvoření služby na Windows
-1. Vytvoření spouštěcího skriptu
+	**Postup pro vytvoření služby na Windows**
+	
+1. **Vytvoření spouštěcího skriptu**
 
     Vytvořte .bat soubor, který aktivuje virtuální prostředí a spustí skripty.
 
-Obsah souboru run_main.bat:
+	**Obsah souboru run_main.bat:**
 
-@echo off
+```@echo off
 cd /d C:\Tepelka\PowerWorldTuya
 call venv\Scripts\activate
 python main.py
 
-Obsah souboru run_app.bat:
+```
 
-@echo off
+	**Obsah souboru run_app.bat:**
+
+```@echo off
 cd /d C:\Tepelka\PowerWorldTuya\Rozhrani
 call ..\venv\Scripts\activate
 python app.py
+```
 
 
 
-2. Vytvoření služby pomocí nssm
+2. **Vytvoření služby pomocí nssm**
 
-    Stažení nssm:
+    *Stažení nssm:*
         Stáhněte Non-Sucking Service Manager (nssm) z oficiálního webu.
 
-    Instalace služby pro main.py:
+  **Instalace služby pro main.py:**
         Otevřete terminál (PowerShell nebo CMD) jako správce.
         Spusťte příkaz:
-
+```
 nssm install TepelkaMain
+```
 
 V zobrazeném dialogu nastavte:
 
@@ -256,12 +291,12 @@ V zobrazeném dialogu nastavte:
     Startup directory: Adresář projektu (např. C:\Tepelka\PowerWorldTuya).
 	
 	
-	Instalace služby pro app.py:
+	**Instalace služby pro app.py:**
 
     Spusťte příkaz:
-
+```
     nssm install TepelkaApp
-
+```
     Nastavte podobně jako u main.py:
         Path: Cesta k souboru run_app.bat.
         Startup directory: Adresář projektu (např. C:\Tepelka\PowerWorldTuya\Rozhrani).
@@ -269,43 +304,55 @@ V zobrazeném dialogu nastavte:
 Spuštění služeb:
 
     Po instalaci spusťte služby:
-
+```
 nssm start TepelkaMain
+```
+
+```
 nssm start TepelkaApp
+```
 
 
 
-3. Alternativa: Použití sc příkazu (bez nssm)
-Registrace služby:
+3. **Alternativa: Použití sc příkazu (bez nssm)**
+	**Registrace služby:**
 
-    Vytvořte skript .bat (např. run_all.bat) se spouštěním obou skriptů:
+    Vytvořte skript .bat (např. **run_all.bat**) se spouštěním obou skriptů:
 
-@echo off
+```@echo off
 start cmd /k "cd /d C:\Tepelka\PowerWorldTuya && call venv\Scripts\activate && python main.py"
 start cmd /k "cd /d C:\Tepelka\PowerWorldTuya\Rozhrani && call ..\venv\Scripts\activate && python app.py"
+```
 
-Vytvořte službu:
+**Vytvořte službu:**
 
-sc create Tepelka binPath= "cmd /c C:\cesta\k\run_all.bat" start= auto
+```sc create Tepelka binPath= "cmd /c C:\cesta\k\run_all.bat" start= auto
+```
 
 Spusťte službu:
-
+```
     sc start Tepelka
+```
 
-4. Další kroky
+4. **Další kroky**
 
     Ověřte, že služby běží správně:
 
-sc query TepelkaMain
-sc query TepelkaApp
+```sc query TepelkaMain
+```
+```sc query TepelkaApp
+```
 
 Pro ukončení služeb použijte:
-
+```
 nssm stop TepelkaMain
+```
+```
 nssm stop TepelkaApp
+```
 
 
-5. Další možnost přidání služby přímo v oknech WIN 
+5. 	**Další možnost přidání služby přímo v oknech WIN **
 
 
 	
