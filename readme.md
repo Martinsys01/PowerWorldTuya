@@ -112,12 +112,12 @@ Doporučujeme používat virtuální prostředí pro správu závislostí.
 ```
 
 2. **Aktivace virtuálního prostředí**:
-   - **Windows**:
-     **powershell**
- ```
-     .\venv\Scripts\Activate				
+   - **Windows**:powershell**
+   
 ```
-	 **(.venv)(PS C:\Tepelka\PowerWorldTuya>)**
+     .\venv\Scripts\Activate
+```
+**(.venv)(PS C:\Tepelka\PowerWorldTuya>)**
 	 
 	 **Pokud se vypíše chybová hláška**
 	 **.\venv\Scripts\Activate : File C:\Tepelka\PowerWorldTuya\venv\Scripts\Activate.ps1 
