@@ -99,19 +99,17 @@ Doporučujeme používat virtuální prostředí pro správu závislostí.
 
 1. **Vytvoření virtuálního prostředí**:  Nejprve ověřte zda Pyhon je správně  nainstalován. Napište v PowerShellu 
  python - vrátí se jeho verze  a příkazem  pip  ověříme správnou instalaci balíčků
-   - **Windows**:
-**powershell**  
+   - **Windows**:powershell** C:\Tepelka\PowerWorldTuya\ 
 
 ```
      python -m venv venv
 ```
 	
-     
    - **Linux**:
 
 ```bash
      python3 -m venv venv
-     ```
+```
 
 2. **Aktivace virtuálního prostředí**:
    - **Windows**:
