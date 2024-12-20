@@ -101,24 +101,24 @@ Doporučujeme používat virtuální prostředí pro správu závislostí.
  python - vrátí se jeho verze  a příkazem  pip  ověříme správnou instalaci balíčků
    - **Windows**:
 **powershell**  
-c
 
 ```
      python -m venv venv
-	```
+```
 	
      
    - **Linux**:
-     ```bash
+
+```bash
      python3 -m venv venv
      ```
 
 2. **Aktivace virtuálního prostředí**:
    - **Windows**:
      **powershell**
-	 ```
+ ```
      .\venv\Scripts\Activate				
-	 ```
+```
 	 **(.venv)(PS C:\Tepelka\PowerWorldTuya>)**
 	 
 	 **Pokud se vypíše chybová hláška**
