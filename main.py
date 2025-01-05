@@ -10,6 +10,7 @@ from config.log_config import setup_logging
 import logging
 import os 
 from dotenv import load_dotenv
+from datetime import datetime
 
 
 
@@ -46,6 +47,23 @@ def check_env():
         )
 
 
+
+def get_polling_interval():
+    """Vrátí optimální interval dotazování podle aktuálního času."""
+    try:
+        current_hour = datetime.now().hour
+    except Exception as e:
+        logging.error(f"Chyba při získávání času: {e}")
+        current_hour = 12  # Výchozí hodnota
+
+    if 0 <= current_hour < 4:
+        return 3600  # 1 dotaz za hodinu
+    else:
+        return 60  # běžná frekvence 1 dotaz za minutu
+
+
+
+    
 
 def create_tuya_connection(config):
     """Vytvoření připojení k Tuya API."""
@@ -124,8 +142,11 @@ def main():
                     else:
                         logging.warning(f"Žádná data od čerpadla {pump.parameters.name}.")
 
-                logging.debug("Cyklus ukládání dokončen, čekám 30 sekund.")
-                time.sleep(30)
+                # Dynamické čekání podle nastavení
+                interval = get_polling_interval()
+                print(f"Další dotaz za {interval} sekund...")
+                logging.debug(f"Cyklus ukládání dokončen, čekám {interval} sekund.")
+                time.sleep(interval)
 
             except Exception as e:
                 logging.error(f"Chyba v hlavní smyčce: {e}")
